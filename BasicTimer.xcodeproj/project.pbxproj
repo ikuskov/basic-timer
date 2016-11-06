@@ -8,11 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		8C5C3AD11DCFD4D7009B542E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5C3AD01DCFD4D7009B542E /* AppDelegate.swift */; };
-		8C5C3AD31DCFD4D7009B542E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5C3AD21DCFD4D7009B542E /* ViewController.swift */; };
+		8C5C3AD31DCFD4D7009B542E /* MutliSetExcerciseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5C3AD21DCFD4D7009B542E /* MutliSetExcerciseViewController.swift */; };
 		8C5C3AD61DCFD4D7009B542E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C5C3AD41DCFD4D7009B542E /* Main.storyboard */; };
 		8C5C3AD81DCFD4D7009B542E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C5C3AD71DCFD4D7009B542E /* Assets.xcassets */; };
 		8C5C3ADB1DCFD4D7009B542E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C5C3AD91DCFD4D7009B542E /* LaunchScreen.storyboard */; };
 		8C5C3AE61DCFD4D7009B542E /* BasicTimerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5C3AE51DCFD4D7009B542E /* BasicTimerTests.swift */; };
+		8CA4D87E1DCFDC8000FDC35E /* MultiSetExcercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA4D87D1DCFDC8000FDC35E /* MultiSetExcercise.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,7 +29,7 @@
 /* Begin PBXFileReference section */
 		8C5C3ACD1DCFD4D7009B542E /* BasicTimer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BasicTimer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C5C3AD01DCFD4D7009B542E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		8C5C3AD21DCFD4D7009B542E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		8C5C3AD21DCFD4D7009B542E /* MutliSetExcerciseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MutliSetExcerciseViewController.swift; sourceTree = "<group>"; };
 		8C5C3AD51DCFD4D7009B542E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8C5C3AD71DCFD4D7009B542E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8C5C3ADA1DCFD4D7009B542E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -36,6 +37,7 @@
 		8C5C3AE11DCFD4D7009B542E /* BasicTimerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BasicTimerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C5C3AE51DCFD4D7009B542E /* BasicTimerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicTimerTests.swift; sourceTree = "<group>"; };
 		8C5C3AE71DCFD4D7009B542E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8CA4D87D1DCFDC8000FDC35E /* MultiSetExcercise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MultiSetExcercise.swift; path = ../MultiSetExcercise.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,8 +79,9 @@
 		8C5C3ACF1DCFD4D7009B542E /* BasicTimer */ = {
 			isa = PBXGroup;
 			children = (
+				8CA4D87D1DCFDC8000FDC35E /* MultiSetExcercise.swift */,
 				8C5C3AD01DCFD4D7009B542E /* AppDelegate.swift */,
-				8C5C3AD21DCFD4D7009B542E /* ViewController.swift */,
+				8C5C3AD21DCFD4D7009B542E /* MutliSetExcerciseViewController.swift */,
 				8C5C3AD41DCFD4D7009B542E /* Main.storyboard */,
 				8C5C3AD71DCFD4D7009B542E /* Assets.xcassets */,
 				8C5C3AD91DCFD4D7009B542E /* LaunchScreen.storyboard */,
@@ -199,7 +202,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8C5C3AD31DCFD4D7009B542E /* ViewController.swift in Sources */,
+				8CA4D87E1DCFDC8000FDC35E /* MultiSetExcercise.swift in Sources */,
+				8C5C3AD31DCFD4D7009B542E /* MutliSetExcerciseViewController.swift in Sources */,
 				8C5C3AD11DCFD4D7009B542E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -404,6 +408,7 @@
 				8C5C3AEC1DCFD4D7009B542E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8C5C3AED1DCFD4D7009B542E /* Build configuration list for PBXNativeTarget "BasicTimerTests" */ = {
 			isa = XCConfigurationList;
@@ -412,6 +417,7 @@
 				8C5C3AEF1DCFD4D7009B542E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
