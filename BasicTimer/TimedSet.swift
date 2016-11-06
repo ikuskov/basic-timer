@@ -11,11 +11,13 @@ import Foundation
 class TimedSet {
   var name: String = ""
   var repsCount: Int?
+  var weight: Int?
   var duration: Int = 0
   
-  init?(name: String, repsCount: Int?, duration: Int) {
+  init?(name: String, repsCount: Int?, weight: Int?, duration: Int) {
     self.name = name
     self.repsCount = repsCount
+    self.weight = weight
     self.duration = duration
   }
 }

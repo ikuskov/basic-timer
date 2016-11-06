@@ -15,6 +15,7 @@
 		8C5C3AE61DCFD4D7009B542E /* BasicTimerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5C3AE51DCFD4D7009B542E /* BasicTimerTests.swift */; };
 		8CA4D87E1DCFDC8000FDC35E /* MultiSetExcercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA4D87D1DCFDC8000FDC35E /* MultiSetExcercise.swift */; };
 		8CA4D8801DCFDDD500FDC35E /* TimedSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA4D87F1DCFDDD500FDC35E /* TimedSet.swift */; };
+		8CA4D8821DCFDFEE00FDC35E /* MultiSetExcerciseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA4D8811DCFDFEE00FDC35E /* MultiSetExcerciseTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,7 @@
 		8C5C3AE71DCFD4D7009B542E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8CA4D87D1DCFDC8000FDC35E /* MultiSetExcercise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MultiSetExcercise.swift; path = ../MultiSetExcercise.swift; sourceTree = "<group>"; };
 		8CA4D87F1DCFDDD500FDC35E /* TimedSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimedSet.swift; sourceTree = "<group>"; };
+		8CA4D8811DCFDFEE00FDC35E /* MultiSetExcerciseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiSetExcerciseTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +88,7 @@
 				8C5C3AD01DCFD4D7009B542E /* AppDelegate.swift */,
 				8C5C3AD21DCFD4D7009B542E /* MutliSetExcerciseViewController.swift */,
 				8C5C3AD41DCFD4D7009B542E /* Main.storyboard */,
+				8CA4D8811DCFDFEE00FDC35E /* MultiSetExcerciseTableViewController.swift */,
 				8C5C3AD71DCFD4D7009B542E /* Assets.xcassets */,
 				8C5C3AD91DCFD4D7009B542E /* LaunchScreen.storyboard */,
 				8C5C3ADC1DCFD4D7009B542E /* Info.plist */,
@@ -208,6 +211,7 @@
 				8CA4D8801DCFDDD500FDC35E /* TimedSet.swift in Sources */,
 				8CA4D87E1DCFDC8000FDC35E /* MultiSetExcercise.swift in Sources */,
 				8C5C3AD31DCFD4D7009B542E /* MutliSetExcerciseViewController.swift in Sources */,
+				8CA4D8821DCFDFEE00FDC35E /* MultiSetExcerciseTableViewController.swift in Sources */,
 				8C5C3AD11DCFD4D7009B542E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
