@@ -9,5 +9,11 @@
 import Foundation
 
 class MultiSetExcercise {
+  var name: String = ""
+  var excerciseSets: [TimedSet]?
   
+  init?(name: String, excerciseSets: [TimedSet]?) {
+    self.name = name
+    self.excerciseSets = excerciseSets
+  }
 }
