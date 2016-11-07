@@ -119,8 +119,8 @@ class MSETableViewController: UITableViewController {
       
       if let selectedCell = sender as? MSETableViewCell {
         let indexPath = tableView.indexPath(for: selectedCell)!
-        let excercise = routines[indexPath.row]
-        vc.excercise = excercise
+        let routine = routines[indexPath.row]
+        vc.routine = routine
       }
     } else if segue.identifier == "SegueAddRoutine" {
       print("Add routine")
@@ -128,12 +128,12 @@ class MSETableViewController: UITableViewController {
   }
   
   @IBAction func applyNewData(sender: UIStoryboardSegue) {
-    if let source = sender.source as? MSEViewController, let excercise = source.excercise {
+    if let source = sender.source as? MSEViewController, let routine = source.routine {
       if let indexPath = tableView.indexPathForSelectedRow {
         print(indexPath)
       } else {
         let newIndex = IndexPath(row: routines.count, section: 0)
-        routines.append(excercise)
+        routines.append(routine)
         tableView.insertRows(at: [newIndex], with: .bottom)
       }
     }

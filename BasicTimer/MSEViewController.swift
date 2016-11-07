@@ -10,7 +10,7 @@ import UIKit
 
 class MSEViewController: UIViewController {
   
-  var excercise: MultiSetExcercise?
+  var routine: MultiSetExcercise?
 
   @IBOutlet weak var saveButton: UIBarButtonItem!
   @IBOutlet weak var nameField: UITextField!
@@ -22,6 +22,16 @@ class MSEViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
+    
+    if let routine = routine {
+      nameField.text = routine.name
+      let timedSet = routine.excerciseSets![0]
+      weightField.text = String(timedSet.weight!)
+      repsField.text = String(timedSet.repsCount!)
+      setsField.text = String(routine.excerciseSets!.count)
+      durationField.text = String(timedSet.duration)
+    }
+    
   }
 
   override func didReceiveMemoryWarning() {
@@ -51,7 +61,7 @@ class MSEViewController: UIViewController {
       let timedSet = TimedSet(name: name ?? "Set", repsCount: repsCount, weight: weight, duration: duration ?? 0)
       let tsArray = Array(repeating: timedSet!, count: setsCount!)
       
-      excercise = MultiSetExcercise(name: name ?? "MSE", excerciseSets: tsArray)
+      routine = MultiSetExcercise(name: name ?? "MSE", excerciseSets: tsArray)
     }
   }
 }
