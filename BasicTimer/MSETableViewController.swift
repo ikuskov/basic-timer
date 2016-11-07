@@ -24,6 +24,8 @@ class MSETableViewController: UITableViewController {
     // self.navigationItem.rightBarButtonItem = self.editButtonItem()
   }
   
+  // MARK: Helpers
+  
   func loadSampleData() {
     let set1 = TimedSet(name: "Bench press", repsCount: 5, weight: 180, duration: 3*60)!
     let setArr1 = Array(repeating: set1, count: 4)
@@ -34,6 +36,17 @@ class MSETableViewController: UITableViewController {
     let setArr2 = Array(repeating: set2, count: 3)
     let excercise2 = MultiSetExcercise(name: "Squats", excerciseSets: setArr2)!
     excercises += [excercise2]
+  }
+  
+  func formatTime(fromSeconds: Int) -> String {
+    let seconds = fromSeconds % 60
+    let minutes = fromSeconds / 60 % 60
+    let hours = fromSeconds / (60 * 60)
+    if hours == 0 {
+      return String(format: "%02i:%02i", minutes, seconds)
+    } else {
+      return String(format: "%02i:%02i:%02i", hours, minutes, seconds)
+    }
   }
 
   // MARK: - Table view data source
@@ -52,6 +65,13 @@ class MSETableViewController: UITableViewController {
     
     let excercise = excercises[indexPath.row]
     cell.name.text = excercise.name
+    if let timedSet = excercise.excerciseSets?[0] {
+      cell.timeLabel.text = formatTime(fromSeconds: timedSet.duration)
+    } else {
+      cell.timeLabel.text = "--:--"
+    }
+    
+    cell.descriptionLabel.text = excercise.getDescription()
     
     return cell
   }

@@ -16,4 +16,12 @@ class MultiSetExcercise {
     self.name = name!
     self.excerciseSets = excerciseSets
   }
+  
+  func getDescription() -> String {
+    if let timedSet = excerciseSets?[0] {
+      return String(format: "%@ x %i sets", timedSet.getDescription(), excerciseSets!.count)
+    } else {
+      return "--"
+    }
+  }
 }

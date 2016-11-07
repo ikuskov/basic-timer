@@ -20,4 +20,25 @@ class TimedSet {
     self.weight = weight
     self.duration = duration
   }
+  
+  func getDescription() -> String {
+    var desc = ""
+    if (weight != nil) {
+      if weight == 0 {
+        desc += "body"
+      } else {
+        desc += String(format: "%i lb", weight!)
+      }
+    }
+    
+    if (repsCount != nil) {
+      desc += String(format: "/%i reps", repsCount!)
+    }
+    
+    if desc == "" {
+      return "Blank"
+    }
+    
+    return desc
+  }
 }
