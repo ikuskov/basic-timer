@@ -164,6 +164,7 @@
 				TargetAttributes = {
 					8C5C3ACC1DCFD4D7009B542E = {
 						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = VTW7378T4D;
 						ProvisioningStyle = Automatic;
 					};
 					8C5C3AE01DCFD4D7009B542E = {
@@ -361,6 +362,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = VTW7378T4D;
 				INFOPLIST_FILE = BasicTimer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ivanco.BasicTimer;
@@ -373,6 +375,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = VTW7378T4D;
 				INFOPLIST_FILE = BasicTimer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ivanco.BasicTimer;

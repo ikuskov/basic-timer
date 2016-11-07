@@ -21,10 +21,11 @@ class Routine {
     let timedSet = excerciseSets[0]
     return String(format: "%@ x %i sets", timedSet.getDescription(), excerciseSets.count)
   }
+  
   /*
     Return Groups - sets of the same excercise
   */
-  func getGroups() ->Array<Array<TimedSet>> {
+  func getGroups() -> Array<Array<TimedSet>> {
     var groups = [[TimedSet]]()
     var group = [TimedSet]()
     var currentSet = excerciseSets[0]

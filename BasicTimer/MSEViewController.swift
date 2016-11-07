@@ -41,6 +41,8 @@ class MSEViewController: UIViewController, BlockyTimePickerDelegate {
       setsStepper.value = Double(routine.excerciseSets.count)
     }
     
+    // To hide keyboard on taps outside of text edit area
+    view.addGestureRecognizer(UITapGestureRecognizer(target: view, action: #selector(view.endEditing)))
   }
 
   override func didReceiveMemoryWarning() {
