@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MSEViewController: UIViewController {
+class MSEViewController: UIViewController, BlockyTimePickerDelegate {
   
   var routine: Routine?
 
@@ -18,18 +18,27 @@ class MSEViewController: UIViewController {
   @IBOutlet weak var repsField: UITextField!
   @IBOutlet weak var setsField: UITextField!
   @IBOutlet weak var timePicker: BlockyTimePicker!
+  @IBOutlet weak var minutesField: UITextField!
+  @IBOutlet weak var secondsField: UITextField!
+  @IBOutlet weak var repsStepper: UIStepper!
+  @IBOutlet weak var setsStepper: UIStepper!
   
   override func viewDidLoad() {
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
     
+    timePicker.delegate = self
+    
     if let routine = routine {
       nameField.text = routine.name
       let timedSet = routine.excerciseSets[0]
+      print(routine.getGroups())
       weightField.text = String(timedSet.weight!)
       repsField.text = String(timedSet.repsCount!)
       setsField.text = String(routine.excerciseSets.count)
       timePicker.duration = timedSet.duration
+      repsStepper.value = Double(timedSet.repsCount!)
+      setsStepper.value = Double(routine.excerciseSets.count)
     }
     
   }
@@ -63,6 +72,22 @@ class MSEViewController: UIViewController {
       
       routine = Routine(name: name ?? "MSE", excerciseSets: tsArray)
     }
+  }
+  
+  // MARK: BlockyTimePickerDelegate
+  
+  func durationDidUpdate(_ duration: Int) {
+    minutesField.text = String(format: "%02i", duration / 60 % 60)
+    secondsField.text = String(format: "%02i", duration % 60)
+  }
+  
+  // MARK: Steppers
+  
+  @IBAction func repsValueChanged(_ sender: UIStepper) {
+    repsField.text = String(Int(sender.value))
+  }
+  @IBAction func setsValueChanged(_ sender: UIStepper) {
+    setsField.text = String(Int(sender.value))
   }
 }
 

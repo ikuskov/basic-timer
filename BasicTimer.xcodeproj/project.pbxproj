@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8C42CBBF1DD0446900963497 /* BlockyTimePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C42CBBE1DD0446900963497 /* BlockyTimePicker.swift */; };
+		8C42CBC11DD052A900963497 /* BlockyTimePickerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C42CBC01DD052A900963497 /* BlockyTimePickerProtocol.swift */; };
 		8C5C3AD11DCFD4D7009B542E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5C3AD01DCFD4D7009B542E /* AppDelegate.swift */; };
 		8C5C3AD31DCFD4D7009B542E /* MSEViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5C3AD21DCFD4D7009B542E /* MSEViewController.swift */; };
 		8C5C3AD61DCFD4D7009B542E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C5C3AD41DCFD4D7009B542E /* Main.storyboard */; };
@@ -32,6 +33,7 @@
 
 /* Begin PBXFileReference section */
 		8C42CBBE1DD0446900963497 /* BlockyTimePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockyTimePicker.swift; sourceTree = "<group>"; };
+		8C42CBC01DD052A900963497 /* BlockyTimePickerProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockyTimePickerProtocol.swift; sourceTree = "<group>"; };
 		8C5C3ACD1DCFD4D7009B542E /* BasicTimer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BasicTimer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C5C3AD01DCFD4D7009B542E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8C5C3AD21DCFD4D7009B542E /* MSEViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSEViewController.swift; sourceTree = "<group>"; };
@@ -92,6 +94,7 @@
 				8C5C3AD01DCFD4D7009B542E /* AppDelegate.swift */,
 				8C5C3AD21DCFD4D7009B542E /* MSEViewController.swift */,
 				8C5C3AD41DCFD4D7009B542E /* Main.storyboard */,
+				8C42CBC01DD052A900963497 /* BlockyTimePickerProtocol.swift */,
 				8C42CBBE1DD0446900963497 /* BlockyTimePicker.swift */,
 				8CA4D8811DCFDFEE00FDC35E /* MSETableViewController.swift */,
 				8CA4D8831DCFE2DE00FDC35E /* MSETableViewCell.swift */,
@@ -218,6 +221,7 @@
 				8CA4D87E1DCFDC8000FDC35E /* Routine.swift in Sources */,
 				8C5C3AD31DCFD4D7009B542E /* MSEViewController.swift in Sources */,
 				8CA4D8841DCFE2DE00FDC35E /* MSETableViewCell.swift in Sources */,
+				8C42CBC11DD052A900963497 /* BlockyTimePickerProtocol.swift in Sources */,
 				8C42CBBF1DD0446900963497 /* BlockyTimePicker.swift in Sources */,
 				8CA4D8821DCFDFEE00FDC35E /* MSETableViewController.swift in Sources */,
 				8C5C3AD11DCFD4D7009B542E /* AppDelegate.swift in Sources */,

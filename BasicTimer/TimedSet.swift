@@ -8,7 +8,7 @@
 
 import Foundation
 
-class TimedSet {
+class TimedSet: Equatable {
   var name: String = ""
   var repsCount: Int?
   var weight: Int?
@@ -40,5 +40,15 @@ class TimedSet {
     }
     
     return desc
+  }
+  
+  // MARK: Equatable
+  
+  static func ==(a: TimedSet, b: TimedSet) -> Bool {
+    return
+      a.name == b.name &&
+      a.repsCount == b.repsCount &&
+      a.weight == b.weight &&
+      a.duration == b.duration
   }
 }

@@ -18,7 +18,9 @@ class BlockyTimePicker: UIView, UIGestureRecognizerDelegate {
   
   var minuteButtons = [UIButton]()
   var secondButtons = [UIButton]()
+  var delegate: BlockyTimePickerDelegate?
   
+  let minuteConsts = Array(0...5)
   let secondConsts = [0, 5, 10, 15, 30, 45];
   
   let spacing = 5
@@ -30,9 +32,9 @@ class BlockyTimePicker: UIView, UIGestureRecognizerDelegate {
   required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
     
-    for index in 0..<5 {
+    for index in 0..<minuteConsts.count {
       let button = UIButton(frame: CGRect(x: 0, y: 0, width: width, height: height))
-      let title = String(format: "%02i", index)
+      let title = String(format: "%02i", minuteConsts[index])
       button.setTitle(title, for: .normal)
       button.backgroundColor = UIColor.lightGray
       button.setTitleColor(UIColor.red, for: .normal)
@@ -75,7 +77,8 @@ class BlockyTimePicker: UIView, UIGestureRecognizerDelegate {
   }
   
   override var intrinsicContentSize: CGSize {
-    return CGSize(width: 240, height: 90)
+    let maxCount = max(minuteButtons.count, secondButtons.count)
+    return CGSize(width: maxCount * (width + spacing), height: 2 * (height + spacing))
   }
   
   // MARK: Button Action
@@ -83,7 +86,7 @@ class BlockyTimePicker: UIView, UIGestureRecognizerDelegate {
     var minutes = duration / 60 % 60
     var seconds = duration % 60
     if let index = minuteButtons.index(of: button) {
-      minutes = index
+      minutes = minuteConsts[index]
     } else if let index = secondButtons.index(of: button) {
       seconds = secondConsts[index]
     }
@@ -94,6 +97,8 @@ class BlockyTimePicker: UIView, UIGestureRecognizerDelegate {
   }
   
   func updateButtonStates() {
+    delegate?.durationDidUpdate(duration)
+    
     let minutes = duration / 60 % 60
     let seconds = duration % 60
     
@@ -102,7 +107,7 @@ class BlockyTimePicker: UIView, UIGestureRecognizerDelegate {
     }
     
     for (index, button) in minuteButtons.enumerated() {
-      button.isSelected = index == minutes
+      button.isSelected = minuteConsts[index] == minutes
     }
   }
 
