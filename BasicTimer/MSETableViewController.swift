@@ -10,7 +10,7 @@ import UIKit
 
 class MSETableViewController: UITableViewController {
   
-  var routines = [MultiSetExcercise]()
+  var routines = [Routine]()
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -29,12 +29,12 @@ class MSETableViewController: UITableViewController {
   func loadSampleData() {
     let set1 = TimedSet(name: "Bench press", repsCount: 5, weight: 180, duration: 3*60)!
     let setArr1 = Array(repeating: set1, count: 4)
-    let excercise1 = MultiSetExcercise(name: "Bench press", excerciseSets: setArr1)!
+    let excercise1 = Routine(name: "Bench press", excerciseSets: setArr1)!
     routines += [excercise1]
     
     let set2 = TimedSet(name: "Squats", repsCount: 6, weight:95, duration: 3*60)!
     let setArr2 = Array(repeating: set2, count: 3)
-    let excercise2 = MultiSetExcercise(name: "Squats", excerciseSets: setArr2)!
+    let excercise2 = Routine(name: "Squats", excerciseSets: setArr2)!
     routines += [excercise2]
   }
   
@@ -65,11 +65,8 @@ class MSETableViewController: UITableViewController {
     
     let excercise = routines[indexPath.row]
     cell.name.text = excercise.name
-    if let timedSet = excercise.excerciseSets?[0] {
-      cell.timeLabel.text = formatTime(fromSeconds: timedSet.duration)
-    } else {
-      cell.timeLabel.text = "--:--"
-    }
+    let timedSet = excercise.excerciseSets[0]
+    cell.timeLabel.text = formatTime(fromSeconds: timedSet.duration)
     
     cell.descriptionLabel.text = excercise.getDescription()
     

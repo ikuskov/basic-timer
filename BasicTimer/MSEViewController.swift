@@ -10,14 +10,14 @@ import UIKit
 
 class MSEViewController: UIViewController {
   
-  var routine: MultiSetExcercise?
+  var routine: Routine?
 
   @IBOutlet weak var saveButton: UIBarButtonItem!
   @IBOutlet weak var nameField: UITextField!
   @IBOutlet weak var weightField: UITextField!
   @IBOutlet weak var repsField: UITextField!
   @IBOutlet weak var setsField: UITextField!
-  @IBOutlet weak var durationField: UITextField!
+  @IBOutlet weak var timePicker: BlockyTimePicker!
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -25,11 +25,11 @@ class MSEViewController: UIViewController {
     
     if let routine = routine {
       nameField.text = routine.name
-      let timedSet = routine.excerciseSets![0]
+      let timedSet = routine.excerciseSets[0]
       weightField.text = String(timedSet.weight!)
       repsField.text = String(timedSet.repsCount!)
-      setsField.text = String(routine.excerciseSets!.count)
-      durationField.text = String(timedSet.duration)
+      setsField.text = String(routine.excerciseSets.count)
+      timePicker.duration = timedSet.duration
     }
     
   }
@@ -56,12 +56,12 @@ class MSEViewController: UIViewController {
       let weight = Int(weightField.text ?? "0")
       let repsCount = Int(repsField.text ?? "0")
       let setsCount = Int(setsField.text ?? "1")
-      let duration = Int(durationField.text ?? "0")
+      let duration = timePicker.duration
       
-      let timedSet = TimedSet(name: name ?? "Set", repsCount: repsCount, weight: weight, duration: duration ?? 0)
+      let timedSet = TimedSet(name: name ?? "Set", repsCount: repsCount, weight: weight, duration: duration)
       let tsArray = Array(repeating: timedSet!, count: setsCount!)
       
-      routine = MultiSetExcercise(name: name ?? "MSE", excerciseSets: tsArray)
+      routine = Routine(name: name ?? "MSE", excerciseSets: tsArray)
     }
   }
 }

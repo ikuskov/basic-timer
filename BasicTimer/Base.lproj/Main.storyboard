@@ -23,7 +23,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="I46-bD-3Yu">
-                                <rect key="frame" x="16" y="124" width="343" height="467.5"/>
+                                <rect key="frame" x="16" y="124" width="343" height="527.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xgp-fq-NeC">
                                         <rect key="frame" x="0.0" y="0.0" width="343" height="20.5"/>
@@ -85,20 +85,18 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YSF-rh-60l">
-                                        <rect key="frame" x="0.0" y="363" width="343" height="30"/>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
+                                    <view contentMode="scaleToFill" placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="90" translatesAutoresizingMaskIntoConstraints="NO" id="LNS-7T-YL2" customClass="BlockyTimePicker" customModule="BasicTimer" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="363" width="343" height="90"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pvR-VE-aSX">
-                                        <rect key="frame" x="0.0" y="405" width="343" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="465" width="343" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IrF-Po-YEz">
-                                        <rect key="frame" x="0.0" y="437.5" width="343" height="30"/>
+                                        <rect key="frame" x="0.0" y="497.5" width="343" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -126,11 +124,11 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="durationField" destination="YSF-rh-60l" id="g0X-1N-OcF"/>
                         <outlet property="nameField" destination="Iaw-6x-iiY" id="Q57-2b-7Gq"/>
                         <outlet property="repsField" destination="ruS-uk-Mgq" id="0UY-MF-leK"/>
                         <outlet property="saveButton" destination="Mq3-YX-G2L" id="0kY-fH-IZo"/>
                         <outlet property="setsField" destination="6dE-T7-4fp" id="AzD-0t-O1B"/>
+                        <outlet property="timePicker" destination="LNS-7T-YL2" id="XR1-pN-hEw"/>
                         <outlet property="weightField" destination="kfg-fG-XUG" id="oRH-OO-9Op"/>
                     </connections>
                 </viewController>
