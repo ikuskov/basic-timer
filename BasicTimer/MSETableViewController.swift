@@ -114,10 +114,14 @@ class MSETableViewController: UITableViewController {
     if segue.identifier == "SegueEditRoutine" {
       let vc = segue.destination as! MSEViewController
       
-      if let selectedCell = sender as? MSETableViewCell {
-        let indexPath = tableView.indexPath(for: selectedCell)!
-        let routine = routines[indexPath.row]
-        vc.routine = routine
+      if let button = sender as? UIButton {
+        if let superview = button.superview {
+          if let selectedCell = superview.superview as? MSETableViewCell {
+            let indexPath = tableView.indexPath(for: selectedCell)!
+            let routine = routines[indexPath.row]
+            vc.routine = routine
+          }
+        }
       }
     } else if segue.identifier == "SegueAddRoutine" {
       print("Add routine")

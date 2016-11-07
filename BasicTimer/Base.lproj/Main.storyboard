@@ -136,8 +136,8 @@
                                             </textField>
                                         </subviews>
                                     </stackView>
-                                    <view contentMode="scaleToFill" ambiguous="YES" placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="90" translatesAutoresizingMaskIntoConstraints="NO" id="LNS-7T-YL2" customClass="BlockyTimePicker" customModule="BasicTimer" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="338" width="240" height="90"/>
+                                    <view contentMode="scaleToFill" ambiguous="YES" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="90" translatesAutoresizingMaskIntoConstraints="NO" id="LNS-7T-YL2" customClass="BlockyTimePicker" customModule="BasicTimer" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="338" width="320" height="90"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Total" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pvR-VE-aSX">
@@ -247,13 +247,21 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YKk-5P-7ys">
+                                            <rect key="frame" x="287" y="4" width="46" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" title="Edit"/>
+                                            <connections>
+                                                <segue destination="BYZ-38-t0r" kind="show" identifier="SegueEditRoutine" id="WGY-rF-23v"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="descriptionLabel" destination="pUF-tJ-TjX" id="0PI-Ri-D7W"/>
                                     <outlet property="name" destination="9LT-gF-mBF" id="dwc-m9-Ltr"/>
                                     <outlet property="timeLabel" destination="vCH-5d-AY3" id="lts-3I-hbJ"/>
-                                    <segue destination="BYZ-38-t0r" kind="show" identifier="SegueEditRoutine" id="vKC-Dn-KPO"/>
+                                    <segue destination="BYZ-38-t0r" kind="show" identifier="SegueEdit" id="vKC-Dn-KPO"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -277,7 +285,7 @@
         <!--Navigation Controller-->
         <scene sceneID="nq8-Mh-oTJ">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="xes-zx-m33" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="RoutinesNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="xes-zx-m33" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="hzK-TC-QHk">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -294,6 +302,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="vKC-Dn-KPO"/>
+        <segue reference="WGY-rF-23v"/>
     </inferredMetricsTieBreakers>
 </document>
