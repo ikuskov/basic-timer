@@ -21,7 +21,16 @@ class MSEViewController: UIViewController {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
   }
-
-
+  
+  // MARK: Navigation
+  
+  @IBAction func handleCancel(_ sender: UIBarButtonItem) {
+    let isModal = presentingViewController is UINavigationController
+    if isModal {
+      dismiss(animated: true, completion: nil)
+    } else {
+      navigationController!.popViewController(animated: true)
+    }
+  }
 }
 

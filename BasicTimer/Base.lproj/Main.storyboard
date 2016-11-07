@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Routine-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="MSEViewController" customModule="BasicTimer" customModuleProvider="target" sceneMemberID="viewController">
@@ -113,8 +113,12 @@
                             <constraint firstAttribute="trailingMargin" secondItem="I46-bD-3Yu" secondAttribute="trailing" id="SQF-Bo-HTl"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="j8h-4G-hvA">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Dbs-nX-1fl"/>
+                    <navigationItem key="navigationItem" title="Routine" id="j8h-4G-hvA">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Dbs-nX-1fl">
+                            <connections>
+                                <action selector="handleCancel:" destination="BYZ-38-t0r" id="N8z-Sh-pQ0"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="Mq3-YX-G2L"/>
                     </navigationItem>
                 </viewController>
@@ -138,7 +142,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nvf-Rg-6PU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1200.8" y="194.75262368815595"/>
+            <point key="canvasLocation" x="1190" y="681"/>
         </scene>
         <!--Routines-->
         <scene sceneID="ti6-cc-V8P">
@@ -183,6 +187,7 @@
                                     <outlet property="descriptionLabel" destination="pUF-tJ-TjX" id="0PI-Ri-D7W"/>
                                     <outlet property="name" destination="9LT-gF-mBF" id="dwc-m9-Ltr"/>
                                     <outlet property="timeLabel" destination="vCH-5d-AY3" id="lts-3I-hbJ"/>
+                                    <segue destination="BYZ-38-t0r" kind="show" identifier="editRoutine" id="vKC-Dn-KPO"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -192,7 +197,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Routines" id="Tgs-hm-8s7">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="ff1-mY-9Be"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="ff1-mY-9Be">
+                            <connections>
+                                <segue destination="X8G-8V-VQE" kind="presentation" identifier="addRoutine" id="Il2-K8-Ttx"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4pD-Vh-21X" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -218,4 +227,7 @@
             <point key="canvasLocation" x="-527.20000000000005" y="194.75262368815595"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="vKC-Dn-KPO"/>
+    </inferredMetricsTieBreakers>
 </document>
