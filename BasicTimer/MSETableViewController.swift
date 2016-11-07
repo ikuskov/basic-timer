@@ -10,7 +10,7 @@ import UIKit
 
 class MSETableViewController: UITableViewController {
   
-  var excercises = [MultiSetExcercise]()
+  var routines = [MultiSetExcercise]()
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -30,12 +30,12 @@ class MSETableViewController: UITableViewController {
     let set1 = TimedSet(name: "Bench press", repsCount: 5, weight: 180, duration: 3*60)!
     let setArr1 = Array(repeating: set1, count: 4)
     let excercise1 = MultiSetExcercise(name: "Bench press", excerciseSets: setArr1)!
-    excercises += [excercise1]
+    routines += [excercise1]
     
     let set2 = TimedSet(name: "Squats", repsCount: 6, weight:95, duration: 3*60)!
     let setArr2 = Array(repeating: set2, count: 3)
     let excercise2 = MultiSetExcercise(name: "Squats", excerciseSets: setArr2)!
-    excercises += [excercise2]
+    routines += [excercise2]
   }
   
   func formatTime(fromSeconds: Int) -> String {
@@ -56,14 +56,14 @@ class MSETableViewController: UITableViewController {
   }
   
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return excercises.count
+    return routines.count
   }
   
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cellID = "MultiSetExcerciseCell"
     let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! MSETableViewCell
     
-    let excercise = excercises[indexPath.row]
+    let excercise = routines[indexPath.row]
     cell.name.text = excercise.name
     if let timedSet = excercise.excerciseSets?[0] {
       cell.timeLabel.text = formatTime(fromSeconds: timedSet.duration)
@@ -111,14 +111,32 @@ class MSETableViewController: UITableViewController {
     }
     */
 
-    /*
-    // MARK: - Navigation
+  // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if segue.identifier == "SegueEditRoutine" {
+      let vc = segue.destination as! MSEViewController
+      
+      if let selectedCell = sender as? MSETableViewCell {
+        let indexPath = tableView.indexPath(for: selectedCell)!
+        let excercise = routines[indexPath.row]
+        vc.excercise = excercise
+      }
+    } else if segue.identifier == "SegueAddRoutine" {
+      print("Add routine")
     }
-    */
+  }
+  
+  @IBAction func applyNewData(sender: UIStoryboardSegue) {
+    if let source = sender.source as? MSEViewController, let excercise = source.excercise {
+      if let indexPath = tableView.indexPathForSelectedRow {
+        print(indexPath)
+      } else {
+        let newIndex = IndexPath(row: routines.count, section: 0)
+        routines.append(excercise)
+        tableView.insertRows(at: [newIndex], with: .bottom)
+      }
+    }
+  }
 
 }

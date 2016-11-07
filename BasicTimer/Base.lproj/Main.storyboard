@@ -119,10 +119,23 @@
                                 <action selector="handleCancel:" destination="BYZ-38-t0r" id="N8z-Sh-pQ0"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="Mq3-YX-G2L"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="Mq3-YX-G2L">
+                            <connections>
+                                <segue destination="F4J-xx-1mo" kind="unwind" unwindAction="applyNewDataWithSender:" id="BBv-tD-SJ7"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="durationField" destination="YSF-rh-60l" id="g0X-1N-OcF"/>
+                        <outlet property="nameField" destination="Iaw-6x-iiY" id="Q57-2b-7Gq"/>
+                        <outlet property="repsField" destination="ruS-uk-Mgq" id="0UY-MF-leK"/>
+                        <outlet property="saveButton" destination="Mq3-YX-G2L" id="0kY-fH-IZo"/>
+                        <outlet property="setsField" destination="6dE-T7-4fp" id="AzD-0t-O1B"/>
+                        <outlet property="weightField" destination="kfg-fG-XUG" id="oRH-OO-9Op"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <exit id="F4J-xx-1mo" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2140" y="194.75262368815595"/>
         </scene>
@@ -199,7 +212,7 @@
                     <navigationItem key="navigationItem" title="Routines" id="Tgs-hm-8s7">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="ff1-mY-9Be">
                             <connections>
-                                <segue destination="X8G-8V-VQE" kind="presentation" identifier="addRoutine" id="Il2-K8-Ttx"/>
+                                <segue destination="X8G-8V-VQE" kind="presentation" identifier="SegueAddRoutine" id="Il2-K8-Ttx"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

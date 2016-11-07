@@ -12,6 +12,13 @@ class MSEViewController: UIViewController {
   
   var excercise: MultiSetExcercise?
 
+  @IBOutlet weak var saveButton: UIBarButtonItem!
+  @IBOutlet weak var nameField: UITextField!
+  @IBOutlet weak var weightField: UITextField!
+  @IBOutlet weak var repsField: UITextField!
+  @IBOutlet weak var setsField: UITextField!
+  @IBOutlet weak var durationField: UITextField!
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
@@ -30,6 +37,21 @@ class MSEViewController: UIViewController {
       dismiss(animated: true, completion: nil)
     } else {
       navigationController!.popViewController(animated: true)
+    }
+  }
+  
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if saveButton === sender as? UIBarButtonItem {
+      let name = nameField.text
+      let weight = Int(weightField.text ?? "0")
+      let repsCount = Int(repsField.text ?? "0")
+      let setsCount = Int(setsField.text ?? "1")
+      let duration = Int(durationField.text ?? "0")
+      
+      let timedSet = TimedSet(name: name ?? "Set", repsCount: repsCount, weight: weight, duration: duration ?? 0)
+      let tsArray = Array(repeating: timedSet!, count: setsCount!)
+      
+      excercise = MultiSetExcercise(name: name ?? "MSE", excerciseSets: tsArray)
     }
   }
 }
