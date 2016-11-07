@@ -130,7 +130,8 @@ class MSETableViewController: UITableViewController {
   @IBAction func applyNewData(sender: UIStoryboardSegue) {
     if let source = sender.source as? MSEViewController, let routine = source.routine {
       if let indexPath = tableView.indexPathForSelectedRow {
-        print(indexPath)
+        routines[indexPath.row] = routine
+        tableView.reloadRows(at: [indexPath], with: .none)
       } else {
         let newIndex = IndexPath(row: routines.count, section: 0)
         routines.append(routine)
