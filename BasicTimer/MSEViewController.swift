@@ -8,7 +8,9 @@
 
 import UIKit
 
-class MutliSetExcerciseViewController: UIViewController {
+class MSEViewController: UIViewController {
+  
+  var excercise: MultiSetExcercise?
 
   override func viewDidLoad() {
     super.viewDidLoad()

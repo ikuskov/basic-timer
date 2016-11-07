@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MultiSetExcerciseTableViewController: UITableViewController {
+class MSETableViewController: UITableViewController {
   
   var excercises = [MultiSetExcercise]()
 
@@ -31,37 +31,30 @@ class MultiSetExcerciseTableViewController: UITableViewController {
     excercises += [excercise1]
     
     let set2 = TimedSet(name: "Squats", repsCount: 6, weight:95, duration: 3*60)!
-    let setArr2 = Array(repeating: set1, count: 3)
+    let setArr2 = Array(repeating: set2, count: 3)
     let excercise2 = MultiSetExcercise(name: "Squats", excerciseSets: setArr2)!
     excercises += [excercise2]
   }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+  // MARK: - Table view data source
 
-    // MARK: - Table view data source
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
-    }
-
-    /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
-        return cell
-    }
-    */
+  override func numberOfSections(in tableView: UITableView) -> Int {
+    return 1
+  }
+  
+  override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return excercises.count
+  }
+  
+  override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let cellID = "MultiSetExcerciseCell"
+    let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! MSETableViewCell
+    
+    let excercise = excercises[indexPath.row]
+    cell.name.text = excercise.name
+    
+    return cell
+  }
 
     /*
     // Override to support conditional editing of the table view.
