@@ -60,6 +60,14 @@ class RoutineViewController: UIViewController, UITableViewDataSource, UITableVie
     AudioServicesPlaySystemSound(SystemSoundID(systemSoundID))
   }
   
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if segue.identifier == "SegueEditRoutine" {
+      let vc = segue.destination as! MSEViewController
+      
+      vc.routine = routine
+    }
+  }
+  
   
   // MARK: UITableViewDataSource
   

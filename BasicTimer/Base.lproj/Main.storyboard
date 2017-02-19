@@ -93,7 +93,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="edit" id="adh-9d-Nwl">
                             <connections>
-                                <segue destination="BYZ-38-t0r" kind="show" id="G1g-wg-zam"/>
+                                <segue destination="BYZ-38-t0r" kind="show" identifier="SegueEditRoutine" id="G1g-wg-zam"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
