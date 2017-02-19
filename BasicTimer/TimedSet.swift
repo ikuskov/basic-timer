@@ -20,12 +20,15 @@ class TimedSet: NSObject, NSCoding, NSCopying {
   var timeStarted: Int = -1
   var timeStopped: Int = -1
   var timeComplete: Int = -1
+  var timeLeft: Int = 0
+  var isRunning: Bool = false
   
   init?(name: String, repsCount: Int?, weight: Int, duration: Int) {
     self.name = name
     self.repsCount = repsCount ?? 1
     self.weight = weight
     self.duration = duration
+    self.timeLeft = duration
     
     super.init()
   }

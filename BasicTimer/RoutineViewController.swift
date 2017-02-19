@@ -12,9 +12,13 @@ import AVFoundation
 class RoutineViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
   
   var routine: Routine?
+  var timer: Timer?
+  var currentSet: TimedSet!
   
   @IBOutlet weak var nameField: UILabel!
   @IBOutlet weak var setsTable: UITableView!
+  @IBOutlet weak var startStopButton: UIButton!
+  @IBOutlet weak var timeLabel: UILabel!
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -37,6 +41,8 @@ class RoutineViewController: UIViewController, UITableViewDataSource, UITableVie
 //      setsStepper.value = Double(routine.excerciseSets.count)
     }
     
+    currentSet = routine!.excerciseSets[0]
+    
     // To hide keyboard on taps outside of text edit area
     view.addGestureRecognizer(UITapGestureRecognizer(target: view, action: #selector(view.endEditing)))
   }
@@ -52,13 +58,62 @@ class RoutineViewController: UIViewController, UITableViewDataSource, UITableVie
     }
   }
   
-  @IBAction func handleStart(_ sender: Any) {
+  func playSound() {
     // create a sound ID, in this case its the tweet sound.
     let systemSoundID = 1016
     
     // to play sound
     AudioServicesPlaySystemSound(SystemSoundID(systemSoundID))
   }
+  
+  func handleOneTick() {
+    let currentTime = Int(NSDate().timeIntervalSince1970)
+    if currentSet.isRunning {
+      let timeDelta = currentTime - currentSet.timeStarted
+      currentSet.timeLeft -= timeDelta
+      currentSet.timeStarted = currentTime
+    }
+    if currentSet.timeLeft < 3 {
+      playSound()
+    }
+    timeLabel.text = MSETableViewController.formatTime(fromSeconds: currentSet.timeLeft)
+    setsTable.reloadData()
+    if currentSet.timeLeft == 0 {
+      currentSet.timeComplete = currentTime
+      stopTimer()
+    }
+  }
+  
+  // Start/pause
+  func toggleTimer() {
+    let currentTime = Int(NSDate().timeIntervalSince1970)
+    currentSet.isRunning = !currentSet.isRunning
+    currentSet.timeStarted = currentTime
+    handleOneTick()
+  }
+  
+  func stopTimer() {
+    let current_time = Int(NSDate().timeIntervalSince1970)
+    currentSet.timeStopped = current_time
+    currentSet.timeLeft = currentSet.duration
+    currentSet.isRunning = false
+    timer?.invalidate()
+    timer = nil
+    startStopButton.setTitle("Start!", for: UIControlState.normal)
+  }
+  
+  @IBAction func handleStart(_ sender: Any) {
+    playSound()
+    print("Called handle start")
+    handleOneTick()
+    if timer === nil {
+      timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.handleOneTick), userInfo: nil, repeats: true)
+      toggleTimer()
+      startStopButton.setTitle("Stop!", for: UIControlState.normal)
+    } else {
+      stopTimer()
+    }
+}
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == "SegueEditRoutine" {
@@ -84,7 +139,8 @@ class RoutineViewController: UIViewController, UITableViewDataSource, UITableVie
     let cell = tableView.dequeueReusableCell(withIdentifier: cellID) as! XSetView
     if routine != nil {
       let xSet = routine!.excerciseSets[indexPath.row]
-      cell.xSetLabel.text = String(format: "#%i %@", indexPath.row + 1, xSet.getDescription())
+      let timeLeft = MSETableViewController.formatTime(fromSeconds: xSet.timeLeft)
+      cell.xSetLabel.text = String(format: "#%i %@ %@", indexPath.row + 1, xSet.getDescription(), timeLeft)
     }
     return cell
   }

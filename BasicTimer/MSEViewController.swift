@@ -66,11 +66,16 @@ class MSEViewController: UIViewController, BlockyTimePickerDelegate {
       let name = nameField.text
       let weight = Int(weightField.text ?? "0")
       let repsCount = Int(repsField.text ?? "0")
-      let setsCount = Int(setsField.text ?? "1")
+      let setsCount = Int(setsField.text ?? "1") ?? 1
       let duration = timePicker.duration
       
-      let timedSet = TimedSet(name: name ?? "Set", repsCount: repsCount, weight: weight ?? 0, duration: duration)
-      let tsArray = Array(repeating: timedSet!, count: setsCount ?? 1)
+      let timedSet = TimedSet(name: name ?? "Set", repsCount: repsCount, weight: weight ?? 0, duration: duration)!
+      var tsArray = [TimedSet]()
+      for _ in 1...setsCount {
+        tsArray.append(timedSet.copy() as! TimedSet)
+      }
+//      setArr1.append(set1.copy() as! TimedSet)
+//      let tsArray = Array(repeating: timedSet!, count: setsCount ?? 1)
       
       routine = Routine(name: name ?? "MSE", excerciseSets: tsArray)
     }
