@@ -19,6 +19,8 @@
 		8CA4D8801DCFDDD500FDC35E /* TimedSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA4D87F1DCFDDD500FDC35E /* TimedSet.swift */; };
 		8CA4D8821DCFDFEE00FDC35E /* MSETableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA4D8811DCFDFEE00FDC35E /* MSETableViewController.swift */; };
 		8CA4D8841DCFE2DE00FDC35E /* MSETableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA4D8831DCFE2DE00FDC35E /* MSETableViewCell.swift */; };
+		8CB669E91E5A269200566D3E /* RoutineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB669E81E5A269200566D3E /* RoutineViewController.swift */; };
+		8CB669EB1E5A34EC00566D3E /* XSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB669EA1E5A34EC00566D3E /* XSetView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +50,8 @@
 		8CA4D87F1DCFDDD500FDC35E /* TimedSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimedSet.swift; sourceTree = "<group>"; };
 		8CA4D8811DCFDFEE00FDC35E /* MSETableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MSETableViewController.swift; sourceTree = "<group>"; };
 		8CA4D8831DCFE2DE00FDC35E /* MSETableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MSETableViewCell.swift; sourceTree = "<group>"; };
+		8CB669E81E5A269200566D3E /* RoutineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutineViewController.swift; sourceTree = "<group>"; };
+		8CB669EA1E5A34EC00566D3E /* XSetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XSetView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,11 +97,13 @@
 				8CA4D87F1DCFDDD500FDC35E /* TimedSet.swift */,
 				8C5C3AD01DCFD4D7009B542E /* AppDelegate.swift */,
 				8C5C3AD21DCFD4D7009B542E /* MSEViewController.swift */,
+				8CB669E81E5A269200566D3E /* RoutineViewController.swift */,
 				8C5C3AD41DCFD4D7009B542E /* Main.storyboard */,
 				8C42CBC01DD052A900963497 /* BlockyTimePickerProtocol.swift */,
 				8C42CBBE1DD0446900963497 /* BlockyTimePicker.swift */,
 				8CA4D8811DCFDFEE00FDC35E /* MSETableViewController.swift */,
 				8CA4D8831DCFE2DE00FDC35E /* MSETableViewCell.swift */,
+				8CB669EA1E5A34EC00566D3E /* XSetView.swift */,
 				8C5C3AD71DCFD4D7009B542E /* Assets.xcassets */,
 				8C5C3AD91DCFD4D7009B542E /* LaunchScreen.storyboard */,
 				8C5C3ADC1DCFD4D7009B542E /* Info.plist */,
@@ -225,6 +231,8 @@
 				8C42CBC11DD052A900963497 /* BlockyTimePickerProtocol.swift in Sources */,
 				8C42CBBF1DD0446900963497 /* BlockyTimePicker.swift in Sources */,
 				8CA4D8821DCFDFEE00FDC35E /* MSETableViewController.swift in Sources */,
+				8CB669E91E5A269200566D3E /* RoutineViewController.swift in Sources */,
+				8CB669EB1E5A34EC00566D3E /* XSetView.swift in Sources */,
 				8C5C3AD11DCFD4D7009B542E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

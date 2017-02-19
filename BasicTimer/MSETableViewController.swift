@@ -50,7 +50,7 @@ class MSETableViewController: UITableViewController {
     routines += [excercise2]
   }
   
-  func formatTime(fromSeconds: Int) -> String {
+  static func formatTime(fromSeconds: Int) -> String {
     let seconds = fromSeconds % 60
     let minutes = fromSeconds / 60 % 60
     let hours = fromSeconds / (60 * 60)
@@ -78,7 +78,7 @@ class MSETableViewController: UITableViewController {
     let excercise = routines[indexPath.row]
     cell.name.text = excercise.name
     let timedSet = excercise.excerciseSets[0]
-    cell.timeLabel.text = formatTime(fromSeconds: timedSet.duration)
+    cell.timeLabel.text = MSETableViewController.formatTime(fromSeconds: timedSet.duration)
     
     cell.descriptionLabel.text = excercise.getDescription()
     
@@ -134,6 +134,15 @@ class MSETableViewController: UITableViewController {
             vc.routine = routine
           }
         }
+      }
+    } else if segue.identifier == "SegueShowRoutine" {
+      let vc = segue.destination as! RoutineViewController
+      
+      if let selectedCell = sender as? MSETableViewCell {
+        let indexPath = tableView.indexPath(for: selectedCell)!
+        tableView.selectRow(at: indexPath, animated: true, scrollPosition: .none)
+        let routine = routines[indexPath.row]
+        vc.routine = routine
       }
     } else if segue.identifier == "SegueAddRoutine" {
       print("Add routine")
