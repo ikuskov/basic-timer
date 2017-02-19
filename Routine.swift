@@ -8,13 +8,20 @@
 
 import Foundation
 
-class Routine {
+class Routine: NSObject, NSCoding {
   var name: String = ""
   var excerciseSets: [TimedSet]
+  
+  // MARK: Archiving path
+  
+  static let DocumentsDerictory = FileManager().urls(for: .documentDirectory, in: .userDomainMask).first!
+  static let ArchiveURL = DocumentsDerictory.appendingPathComponent("routines")
   
   init?(name: String?, excerciseSets: [TimedSet]) {
     self.name = name ?? "Fucking around"
     self.excerciseSets = excerciseSets
+    
+    super.init()
   }
   
   func getDescription() -> String {
@@ -47,4 +54,29 @@ class Routine {
     
     return groups
   }
+  
+  // MARK: Types
+  
+  struct Property {
+    static let name = "name"
+    static let excerciseSets = "excerciseSets"
+  }
+  
+  // MARK: NSCoding
+  
+  func encode(with aCoder: NSCoder) {
+    aCoder.encode(name, forKey: Property.name)
+    aCoder.encode(excerciseSets, forKey: Property.excerciseSets)
+  }
+  
+  required convenience init?(coder aDecoder: NSCoder) {
+    let name = aDecoder.decodeObject(forKey: Property.name) as! String
+    let excerciseSets = aDecoder.decodeObject(forKey: Property.excerciseSets) as! [TimedSet]
+    if excerciseSets.count == 0 {
+      return nil
+    }
+    
+    self.init(name: name, excerciseSets: excerciseSets)
+  }
+
 }

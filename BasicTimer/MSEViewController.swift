@@ -33,11 +33,11 @@ class MSEViewController: UIViewController, BlockyTimePickerDelegate {
       nameField.text = routine.name
       let timedSet = routine.excerciseSets[0]
       print(routine.getGroups())
-      weightField.text = String(timedSet.weight!)
-      repsField.text = String(timedSet.repsCount!)
+      weightField.text = String(timedSet.weight)
+      repsField.text = String(timedSet.repsCount)
       setsField.text = String(routine.excerciseSets.count)
       timePicker.duration = timedSet.duration
-      repsStepper.value = Double(timedSet.repsCount!)
+      repsStepper.value = Double(timedSet.repsCount)
       setsStepper.value = Double(routine.excerciseSets.count)
     }
     
@@ -69,8 +69,8 @@ class MSEViewController: UIViewController, BlockyTimePickerDelegate {
       let setsCount = Int(setsField.text ?? "1")
       let duration = timePicker.duration
       
-      let timedSet = TimedSet(name: name ?? "Set", repsCount: repsCount, weight: weight, duration: duration)
-      let tsArray = Array(repeating: timedSet!, count: setsCount!)
+      let timedSet = TimedSet(name: name ?? "Set", repsCount: repsCount, weight: weight ?? 0, duration: duration)
+      let tsArray = Array(repeating: timedSet!, count: setsCount ?? 1)
       
       routine = Routine(name: name ?? "MSE", excerciseSets: tsArray)
     }
