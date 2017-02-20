@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-class RoutineViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class RoutineViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ExtremeEngineDelegate {
   
   var routine: Routine?
   var timer: Timer?
@@ -28,6 +28,10 @@ class RoutineViewController: UIViewController, UITableViewDataSource, UITableVie
     
     setsTable.delegate = self
     setsTable.dataSource = self
+    
+    ExtremeEngine.getInstance().delegate = self
+    ExtremeEngine.getInstance().select(routine: routine!)
+    stateHasUpdated()
     
     if let routine = routine {
       nameField.text = routine.name
@@ -58,80 +62,11 @@ class RoutineViewController: UIViewController, UITableViewDataSource, UITableVie
     }
   }
   
-  func getNextSet() -> TimedSet? {
-    for timedSet in routine!.excerciseSets {
-      if timedSet.timeLeft > 0 {
-        return timedSet
-      }
-    }
-    return nil
-  }
-  
-  func playSound() {
-    // create a sound ID, in this case its the tweet sound.
-    let systemSoundID = 1016
-    
-    // to play sound
-    AudioServicesPlaySystemSound(SystemSoundID(systemSoundID))
-  }
-  
-  func handleOneTick() {
-    let currentTime = Int(NSDate().timeIntervalSince1970)
-    if currentSet.isRunning {
-      let timeDelta = currentTime - currentSet.timeStarted
-      currentSet.timeLeft -= timeDelta
-      currentSet.timeStarted = currentTime
-    }
-    if currentSet.timeLeft < 3 {
-      // playSound()
-    }
-    timeLabel.text = MSETableViewController.formatTime(fromSeconds: currentSet.timeLeft)
-    setsTable.reloadData()
-    if currentSet.timeLeft == 0 {
-      currentSet.timeComplete = currentTime
-      currentSet.timeStopped = currentTime
-      currentSet.isRunning = false
-      let nextSet = getNextSet()
-      if nextSet == nil {
-        stopTimer()
-      } else {
-        currentSet = nextSet!
-        currentSet.isRunning = true
-        currentSet.timeStarted = currentTime
-      }
-    }
-  }
-  
-  // Start/pause
-  func toggleTimer() {
-    let currentTime = Int(NSDate().timeIntervalSince1970)
-    currentSet.isRunning = !currentSet.isRunning
-    currentSet.timeStarted = currentTime
-    handleOneTick()
-  }
-  
-  func stopTimer() {
-    timer?.invalidate()
-    timer = nil
-    for timedSet in routine!.excerciseSets {
-      timedSet.isRunning = false
-      timedSet.timeLeft = timedSet.duration
-    }
-    startStopButton.setTitle("Start!", for: UIControlState.normal)
-  }
-  
   @IBAction func handleStart(_ sender: Any) {
-    playSound()
+    // playSound()
     print("Called handle start")
-    handleOneTick()
-    if timer === nil {
-      timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.handleOneTick), userInfo: nil, repeats: true)
-      toggleTimer()
-      startStopButton.setTitle("Stop!", for: UIControlState.normal)
-    } else {
-      stopTimer()
-    }
-}
+    ExtremeEngine.getInstance().toggleTimer()
+  }
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == "SegueEditRoutine" {
@@ -161,6 +96,19 @@ class RoutineViewController: UIViewController, UITableViewDataSource, UITableVie
       cell.xSetLabel.text = String(format: "#%i %@ %@", indexPath.row + 1, xSet.getDescription(), timeLeft)
     }
     return cell
+  }
+  
+  // MARK: ExtremeEngineDelegate
+  
+  func stateHasUpdated() {
+    if ExtremeEngine.getInstance().isRunning {
+      startStopButton.setTitle("Stop it!!!1", for: UIControlState.normal)
+    } else {
+      startStopButton.setTitle("Let's roll!", for: UIControlState.normal)
+    }
+    let setInProgress = ExtremeEngine.getInstance().setInProgress!
+    timeLabel.text = MSETableViewController.formatTime(fromSeconds: setInProgress.timeLeft)
+    setsTable.reloadData()
   }
   
 }
