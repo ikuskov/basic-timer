@@ -58,6 +58,15 @@ class RoutineViewController: UIViewController, UITableViewDataSource, UITableVie
     }
   }
   
+  func getNextSet() -> TimedSet? {
+    for timedSet in routine!.excerciseSets {
+      if timedSet.timeLeft > 0 {
+        return timedSet
+      }
+    }
+    return nil
+  }
+  
   func playSound() {
     // create a sound ID, in this case its the tweet sound.
     let systemSoundID = 1016
@@ -74,13 +83,22 @@ class RoutineViewController: UIViewController, UITableViewDataSource, UITableVie
       currentSet.timeStarted = currentTime
     }
     if currentSet.timeLeft < 3 {
-      playSound()
+      // playSound()
     }
     timeLabel.text = MSETableViewController.formatTime(fromSeconds: currentSet.timeLeft)
     setsTable.reloadData()
     if currentSet.timeLeft == 0 {
       currentSet.timeComplete = currentTime
-      stopTimer()
+      currentSet.timeStopped = currentTime
+      currentSet.isRunning = false
+      let nextSet = getNextSet()
+      if nextSet == nil {
+        stopTimer()
+      } else {
+        currentSet = nextSet!
+        currentSet.isRunning = true
+        currentSet.timeStarted = currentTime
+      }
     }
   }
   
@@ -93,12 +111,12 @@ class RoutineViewController: UIViewController, UITableViewDataSource, UITableVie
   }
   
   func stopTimer() {
-    let current_time = Int(NSDate().timeIntervalSince1970)
-    currentSet.timeStopped = current_time
-    currentSet.timeLeft = currentSet.duration
-    currentSet.isRunning = false
     timer?.invalidate()
     timer = nil
+    for timedSet in routine!.excerciseSets {
+      timedSet.isRunning = false
+      timedSet.timeLeft = timedSet.duration
+    }
     startStopButton.setTitle("Start!", for: UIControlState.normal)
   }
   
