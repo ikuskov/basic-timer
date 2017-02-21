@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+import Foundation
 
 class ExtremeEngine {
   // MARK: Singletone part
@@ -27,7 +28,7 @@ class ExtremeEngine {
   
   var routine: Routine?
   var setInProgress: TimedSet?
-  var timer: Timer?
+  var timer: DispatchSourceTimer?
   var delegate: ExtremeEngineDelegate?
   var isRunning: Bool = false
   
@@ -95,9 +96,15 @@ class ExtremeEngine {
     setInProgress?.timeStarted = currentTime
     handleOneTick()
     if timer === nil {
-      timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.handleOneTick), userInfo: nil, repeats: true)
+      timer = DispatchSource.makeTimerSource(queue: DispatchQueue.global())
+      timer!.setEventHandler(handler: {
+        DispatchQueue.main.sync {
+          self.handleOneTick()
+        }
+      })
+      timer!.scheduleRepeating(deadline: DispatchTime.now(), interval: 1, leeway: DispatchTimeInterval.milliseconds(1))
+      timer!.resume()
     } else {
-      timer?.invalidate()
       timer = nil
     }
   }
@@ -108,7 +115,6 @@ class ExtremeEngine {
       return //  Timer is not running - nothing to stop
     }
     isRunning = false
-    timer?.invalidate()
     timer = nil
     for timedSet in routine!.excerciseSets {
       timedSet.isRunning = false
