@@ -94,6 +94,11 @@ class RoutineViewController: UIViewController, UITableViewDataSource, UITableVie
       let xSet = routine!.excerciseSets[indexPath.row]
       let timeLeft = MSETableViewController.formatTime(fromSeconds: xSet.timeLeft)
       cell.xSetLabel.text = String(format: "#%i %@ %@", indexPath.row + 1, xSet.getDescription(), timeLeft)
+      if ExtremeEngine.getInstance().setInProgress === xSet {
+        cell.backgroundColor = UIColor.lightGray
+      } else {
+        cell.backgroundColor = nil
+      }
     }
     return cell
   }

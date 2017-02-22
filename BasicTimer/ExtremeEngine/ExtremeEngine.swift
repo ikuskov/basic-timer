@@ -41,8 +41,7 @@ class ExtremeEngine {
     return nil
   }
   
-  @objc private func handleOneTick() {
-    print("handleOneTick")
+  private func handleOneTick() {
     let currentTime = Int(NSDate().timeIntervalSince1970)
     let setInProgress = self.setInProgress!
     if setInProgress.isRunning {
