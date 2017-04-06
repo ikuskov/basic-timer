@@ -15,7 +15,17 @@ class ExtremeEngine {
   
   static var instance: ExtremeEngine?
   
-  private init() {}
+  private init() {
+    do {
+      try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+      // Use https://github.com/TUNER88/iOSSystemSoundsLibrary for the list of system sounds
+      let b = Bundle.init(path: "/System/Library/Audio/UISounds/")
+      let url = b?.url(forResource: "sms_alert_bamboo", withExtension: "caf", subdirectory: "Modern")
+      player = try AVAudioPlayer(contentsOf: url!)
+    } catch {
+      print("ERROR! AVAudio had troubles initializing!")
+    }
+  }
   
   static func getInstance() -> ExtremeEngine {
     if instance == nil {
@@ -31,6 +41,8 @@ class ExtremeEngine {
   var timer: DispatchSourceTimer?
   var delegate: ExtremeEngineDelegate?
   var isRunning: Bool = false
+  
+  var player: AVAudioPlayer?
   
   func getNextSet() -> TimedSet? {
     for timedSet in routine!.excerciseSets {
@@ -69,11 +81,12 @@ class ExtremeEngine {
   }
   
   func playSound() {
-    // create a sound ID, in this case its the tweet sound.
-    let systemSoundID = 1016
-    
-    // to play sound
-    AudioServicesPlaySystemSound(SystemSoundID(systemSoundID))
+    if (player != nil) {
+      player!.play()
+      print("play()")
+    } else {
+      print("skipping play()")
+    }
   }
   
   // MARK: Public API

@@ -63,7 +63,6 @@ class RoutineViewController: UIViewController, UITableViewDataSource, UITableVie
   }
   
   @IBAction func handleStart(_ sender: Any) {
-    // playSound()
     print("Called handle start")
     ExtremeEngine.getInstance().toggleTimer()
   }
