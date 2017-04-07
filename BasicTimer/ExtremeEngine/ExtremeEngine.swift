@@ -53,6 +53,10 @@ class ExtremeEngine {
     return nil
   }
   
+  private func scheduleSound(atTime: Double) {
+    player!.play(atTime: player!.deviceCurrentTime + atTime)
+  }
+  
   private func handleOneTick() {
     let currentTime = Int(NSDate().timeIntervalSince1970)
     let setInProgress = self.setInProgress!
@@ -60,12 +64,10 @@ class ExtremeEngine {
       let timeDelta = currentTime - setInProgress.timeStarted
       setInProgress.timeLeft -= timeDelta
       setInProgress.timeStarted = currentTime
-    }
-    if setInProgress.timeLeft < 3 {
-      playSound()
+      scheduleSound(atTime: Double(setInProgress.timeLeft))
     }
     delegate?.stateHasUpdated()
-    if setInProgress.timeLeft == 0 {
+    if setInProgress.timeLeft <= 0 {
       setInProgress.timeComplete = currentTime
       setInProgress.timeStopped = currentTime
       setInProgress.isRunning = false
@@ -77,15 +79,6 @@ class ExtremeEngine {
         self.setInProgress?.isRunning = true
         self.setInProgress?.timeStarted = currentTime
       }
-    }
-  }
-  
-  func playSound() {
-    if (player != nil) {
-      player!.play()
-      print("play()")
-    } else {
-      print("skipping play()")
     }
   }
   
