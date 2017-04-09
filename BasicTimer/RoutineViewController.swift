@@ -91,7 +91,7 @@ class RoutineViewController: UIViewController, UITableViewDataSource, UITableVie
     let cell = tableView.dequeueReusableCell(withIdentifier: cellID) as! XSetView
     if routine != nil {
       let xSet = routine!.excerciseSets[indexPath.row]
-      let timeLeft = MSETableViewController.formatTime(fromSeconds: xSet.timeLeft)
+      let timeLeft = MSETableViewController.format(time: xSet.timeLeft)
       cell.xSetLabel.text = String(format: "#%i %@ %@", indexPath.row + 1, xSet.getDescription(), timeLeft)
       if ExtremeEngine.getInstance().setInProgress === xSet {
         cell.backgroundColor = UIColor.lightGray
@@ -111,7 +111,7 @@ class RoutineViewController: UIViewController, UITableViewDataSource, UITableVie
       startStopButton.setTitle("Let's roll!", for: UIControlState.normal)
     }
     let setInProgress = ExtremeEngine.getInstance().setInProgress!
-    timeLabel.text = MSETableViewController.formatTime(fromSeconds: setInProgress.timeLeft)
+    timeLabel.text = MSETableViewController.format(time: setInProgress.timeLeft)
     setsTable.reloadData()
   }
   

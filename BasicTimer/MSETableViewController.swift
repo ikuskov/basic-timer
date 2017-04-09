@@ -50,7 +50,8 @@ class MSETableViewController: UITableViewController {
     routines += [excercise2]
   }
   
-  static func formatTime(fromSeconds: Int) -> String {
+  static func format(time: TimeInterval) -> String {
+    let fromSeconds = Int(time)
     let seconds = fromSeconds % 60
     let minutes = fromSeconds / 60 % 60
     let hours = fromSeconds / (60 * 60)
@@ -78,7 +79,7 @@ class MSETableViewController: UITableViewController {
     let excercise = routines[indexPath.row]
     cell.name.text = excercise.name
     let timedSet = excercise.excerciseSets[0]
-    cell.timeLabel.text = MSETableViewController.formatTime(fromSeconds: timedSet.duration)
+    cell.timeLabel.text = MSETableViewController.format(time: timedSet.duration)
     
     cell.descriptionLabel.text = excercise.getDescription()
     
