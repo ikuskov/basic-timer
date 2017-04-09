@@ -37,6 +37,7 @@ class ExtremeEngine {
   
   var player: AVAudioPlayer?
   var players: [AVAudioPlayer] = [AVAudioPlayer]()
+  var nextSoundTime: TimeInterval?
   
   func getNextSet() -> TimedSet? {
     for timedSet in routine!.excerciseSets {
@@ -47,10 +48,18 @@ class ExtremeEngine {
     return nil
   }
   
-  private func scheduleSound(afterTime: Double) {
+  private func scheduleSound(afterTime: Double, loops: Int = 0) {
     // For better user experience - to start playing a bit before `00:00`
     let offset = min(player!.duration / 2, 0.5)
-    player!.play(atTime: player!.deviceCurrentTime + afterTime - offset)
+    let playTime = player!.deviceCurrentTime + afterTime - offset
+    if nextSoundTime == nil {
+      nextSoundTime = playTime
+    }
+    if playTime != nextSoundTime {
+      print("New play time", playTime)
+      player?.numberOfLoops = loops
+      player!.play(atTime: playTime)
+    }
   }
   
   private func cancelSound() {
@@ -64,7 +73,7 @@ class ExtremeEngine {
 //      let b = Bundle.init(path: "/System/Library/Audio/UISounds/")
 //      let url = b?.url(forResource: "sms_alert_bamboo", withExtension: "caf", subdirectory: "Modern")
       let b = Bundle.main
-      let url = b.url(forResource: "Glass", withExtension: "aiff", subdirectory:nil)
+      let url = b.url(forResource: "Glass", withExtension: "aiff", subdirectory: nil)
       return try AVAudioPlayer(contentsOf: url!)
     } catch {
       print("ERROR! AVAudio had troubles initializing!")
@@ -79,7 +88,7 @@ class ExtremeEngine {
       let timeDelta = currentTime - setInProgress.timeStarted
       setInProgress.timeLeft -= timeDelta
       setInProgress.timeStarted = currentTime
-      scheduleSound(afterTime: Double(setInProgress.timeLeft))
+      scheduleSound(afterTime: setInProgress.timeLeft)
     }
     delegate?.stateHasUpdated()
     if setInProgress.timeLeft <= 0 {
@@ -88,6 +97,7 @@ class ExtremeEngine {
       setInProgress.isRunning = false
       let nextSet = getNextSet()
       if nextSet === nil {
+        scheduleSound(afterTime: 0.0, loops: 2)
         stopTimer()
       } else {
         self.setInProgress = nextSet!
