@@ -175,8 +175,6 @@ class MSETableViewController: UITableViewController {
     } else {
       print("Succesfully saved!")
     }
-    
-
   }
   
   func loadData() -> [Routine]? {

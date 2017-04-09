@@ -112,6 +112,16 @@ class RoutineViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     let setInProgress = ExtremeEngine.getInstance().setInProgress!
     timeLabel.text = MSETableViewController.format(time: setInProgress.timeLeft)
+    
+    var row = -1
+    for (index, set) in routine!.excerciseSets.enumerated() {
+      if set === setInProgress {
+        row = index
+      }
+    }
+    if row >= 0 {
+      setsTable.setContentOffset(CGPoint.init(x: 0, y: 50 * row), animated: true)
+    }
     setsTable.reloadData()
   }
   
