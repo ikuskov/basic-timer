@@ -16,15 +16,8 @@ class ExtremeEngine {
   static var instance: ExtremeEngine?
   
   private init() {
-    do {
-      try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
-      // Use https://github.com/TUNER88/iOSSystemSoundsLibrary for the list of system sounds
-      let b = Bundle.init(path: "/System/Library/Audio/UISounds/")
-      let url = b?.url(forResource: "sms_alert_bamboo", withExtension: "caf", subdirectory: "Modern")
-      player = try AVAudioPlayer(contentsOf: url!)
-    } catch {
-      print("ERROR! AVAudio had troubles initializing!")
-    }
+    player = getPlayer()
+    player!.prepareToPlay()
   }
   
   static func getInstance() -> ExtremeEngine {
@@ -43,6 +36,7 @@ class ExtremeEngine {
   var isRunning: Bool = false
   
   var player: AVAudioPlayer?
+  var players: [AVAudioPlayer] = [AVAudioPlayer]()
   
   func getNextSet() -> TimedSet? {
     for timedSet in routine!.excerciseSets {
@@ -53,18 +47,39 @@ class ExtremeEngine {
     return nil
   }
   
-  private func scheduleSound(atTime: Double) {
-    player!.play(atTime: player!.deviceCurrentTime + atTime)
+  private func scheduleSound(afterTime: Double) {
+    // For better user experience - to start playing a bit before `00:00`
+    let offset = min(player!.duration / 2, 0.5)
+    player!.play(atTime: player!.deviceCurrentTime + afterTime - offset)
+  }
+  
+  private func cancelSound() {
+    player!.stop()
+  }
+  
+  private func getPlayer() -> AVAudioPlayer? {
+    do {
+      try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+//      Use https://github.com/TUNER88/iOSSystemSoundsLibrary for the list of system sounds
+//      let b = Bundle.init(path: "/System/Library/Audio/UISounds/")
+//      let url = b?.url(forResource: "sms_alert_bamboo", withExtension: "caf", subdirectory: "Modern")
+      let b = Bundle.main
+      let url = b.url(forResource: "Glass", withExtension: "aiff", subdirectory:nil)
+      return try AVAudioPlayer(contentsOf: url!)
+    } catch {
+      print("ERROR! AVAudio had troubles initializing!")
+    }
+    return nil
   }
   
   private func handleOneTick() {
-    let currentTime = Int(NSDate().timeIntervalSince1970)
+    let currentTime = NSDate().timeIntervalSince1970
     let setInProgress = self.setInProgress!
     if setInProgress.isRunning {
       let timeDelta = currentTime - setInProgress.timeStarted
       setInProgress.timeLeft -= timeDelta
       setInProgress.timeStarted = currentTime
-      scheduleSound(atTime: Double(setInProgress.timeLeft))
+      scheduleSound(afterTime: Double(setInProgress.timeLeft))
     }
     delegate?.stateHasUpdated()
     if setInProgress.timeLeft <= 0 {
@@ -72,14 +87,27 @@ class ExtremeEngine {
       setInProgress.timeStopped = currentTime
       setInProgress.isRunning = false
       let nextSet = getNextSet()
-      if nextSet == nil {
+      if nextSet === nil {
         stopTimer()
       } else {
         self.setInProgress = nextSet!
-        self.setInProgress?.isRunning = true
-        self.setInProgress?.timeStarted = currentTime
+        self.setInProgress!.isRunning = true
+        self.setInProgress!.timeStarted = currentTime
+        scheduleSound(afterTime: self.setInProgress!.timeLeft)
       }
     }
+  }
+  
+  private func willStartRunning() {
+    handleOneTick()
+    let xSet = getNextSet()
+    if xSet !== nil {
+      scheduleSound(afterTime: xSet!.timeLeft)
+    }
+  }
+  
+  private func willPauseRunning() {
+    cancelSound()
   }
   
   // MARK: Public API
@@ -95,11 +123,16 @@ class ExtremeEngine {
   
   // Start/pause currently going timer
   func toggleTimer() {
-    let currentTime = Int(NSDate().timeIntervalSince1970)
+    let currentTime = NSDate().timeIntervalSince1970
     isRunning = !isRunning
     setInProgress?.isRunning = !(setInProgress?.isRunning)!
     setInProgress?.timeStarted = currentTime
-    handleOneTick()
+    if isRunning {
+      willStartRunning()
+    } else {
+      willPauseRunning()
+    }
+    
     if timer === nil {
       timer = DispatchSource.makeTimerSource(queue: DispatchQueue.global())
       timer!.setEventHandler(handler: {
@@ -107,7 +140,7 @@ class ExtremeEngine {
           self.handleOneTick()
         }
       })
-      timer!.scheduleRepeating(deadline: DispatchTime.now(), interval: 1, leeway: DispatchTimeInterval.milliseconds(1))
+      timer!.scheduleRepeating(deadline: DispatchTime.now(), interval: 0.25, leeway: DispatchTimeInterval.milliseconds(1))
       timer!.resume()
     } else {
       timer = nil
@@ -123,7 +156,7 @@ class ExtremeEngine {
     timer = nil
     for timedSet in routine!.excerciseSets {
       timedSet.isRunning = false
-      timedSet.timeLeft = timedSet.duration
+      timedSet.timeLeft = TimeInterval(timedSet.duration)
     }
     setInProgress = getNextSet()!
     delegate?.stateHasUpdated()
